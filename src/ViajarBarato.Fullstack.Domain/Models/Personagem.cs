@@ -6,10 +6,7 @@ namespace ViajarBarato.Fullstack.Domain.Models
 {
     public class Personagem
     {
-        public string Nome { get; set; }
-        public string PlanetaId { get; set; }
-        public string EspecieId { get; set; }
+        public string Nome { get; set; }        
         public Planeta PlanetaNatal { get; set; }
-        public Especie Especie { get; set; }
     }
 }

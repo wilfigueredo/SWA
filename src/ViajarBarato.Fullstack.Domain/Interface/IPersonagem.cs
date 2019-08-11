@@ -8,6 +8,6 @@ namespace ViajarBarato.Fullstack.Domain.Interface
 {
     public interface IPersonagem
     {
-        Task<IEnumerable<Personagem>> ObterPaginado(int page);
+        Task<IEnumerable<KeyValuePair<Personagem,int>>> ObterPaginado(int page);
     }
 }

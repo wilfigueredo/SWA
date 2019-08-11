@@ -1,0 +1,27 @@
+<h1>Challenge</h1>
+<p>Desafio para demonstração de habilidades</p>
+<p *ngIf="!loading"><em>Loading...</em></p>
+
+
+
+<table class='table table-striped' *ngIf="swa && loading">
+  <thead>
+    <tr>
+      <th>Personagem</th>
+      <th>Planeta Natal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let swa of swa">
+      <td>{{ swa.nomePersonagem }}</td>
+      <td>{{ swa.planetaNatal }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ngb-pagination *ngIf="swa && loading" [collectionSize]="collectionSize" [pageSize]="pageSize" [(page)]="page"
+                aria-label="Default pagination" (pageChange)="loadData()"></ngb-pagination>
+
+<pre>Current page: {{page}}</pre>
+<pre>collection Size: {{collectionSize}}</pre>
+<pre>Page Size: {{pageSize}}</pre>
