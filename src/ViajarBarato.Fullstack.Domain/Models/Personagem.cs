@@ -8,5 +8,6 @@ namespace ViajarBarato.Fullstack.Domain.Models
     {
         public string Nome { get; set; }        
         public Planeta PlanetaNatal { get; set; }
+        public Especie Especie { get; set; }
     }
 }

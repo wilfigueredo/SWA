@@ -11,6 +11,9 @@ using ViajarBarato.Fullstack.Web.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ViajarBarato.Fullstack.Domain.Interface;
+using ViajarBarato.Fullstack.Domain.Services;
+using ViajarBarato.Fullstack.Infra.Data.ExternalServices;
 
 namespace ViajarBarato.Fullstack.Web
 {
@@ -39,6 +42,12 @@ namespace ViajarBarato.Fullstack.Web
             services.AddAuthentication()
                 .AddIdentityServerJwt();
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddScoped<IPersonagemService, PersonagemService>();
+            services.AddScoped<IPersonagemRepositorio, PersonagemRepositorio>();
+            services.AddScoped<IEspecieService, EspecieService>();
+            services.AddScoped<IEspecieRepositorio, EspecieRepositorio>();
+            services.AddScoped<IPlanetaRepositorio, PlanetaRepositorio>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

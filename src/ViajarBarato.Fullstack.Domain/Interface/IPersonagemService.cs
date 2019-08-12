@@ -6,8 +6,9 @@ using ViajarBarato.Fullstack.Domain.Models;
 
 namespace ViajarBarato.Fullstack.Domain.Interface
 {
-    public interface IPersonagem
+    public interface IPersonagemService
     {
-        Task<IEnumerable<KeyValuePair<Personagem,int>>> ObterPaginado(int page);
+        Task<IEnumerable<KeyValuePair<Personagem, int>>> ObterPaginado(int page);
+        Task<IEnumerable<Personagem>> ObterTodos();
     }
 }
