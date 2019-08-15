@@ -1,0 +1,93 @@
+Sabendo que todos os programadores do Viajar Barato possuem amplo
+conhecimento em .NET e SQL Server, se você fosse construir um novo site do
+Viajar Barato, qual tecnologia e arquitetura você usaria? Explique o motivo da
+sua escolha e aponte como usar cada uma delas.
+
+Supondo que o viajar barato seja uma aplicação de alta complexidade, irei especificar abaixo a
+arquitetura escolhida, assim como quais tecnologias utilizaria e o porquê em cada camada.
+A arquitetura escolhida seria a clean architecture
+
+Motivo: Esta arquitetura ajuda a gerenciar a complexidade da aplicação, organização do código
+e facilita nas aplicações de padrões arquiteturais e modelagem tais como: CQRS, DDD, entre
+outros.
+
+como usar: Divida seu projeto em camadas, nesse caso do viajar barato escolheria as
+seguintes camadas: Service, Domain, Infra e crosscuting e no nosso caso também teremos uma
+camada de testes.
+
+As tecnologias utilizadas nas diversas camadas da clean architecture será citada abaixo,
+iniciando pela camada de domínio.
+
+Domain: tendo em mente que as entidades de domínio devem ser entidades poco, ou seja,
+aquilo que depende apenas CLR isto é sem conhecimentos de frameworks externos, nessa
+camada não seria aplicada nenhuma tecnologia, apenas modelaríamos aplicando o padrão
+arquitetural CQRS nas entidades em que o negócio tiver maior complexidade. As Entidades
+nessa camada devem ser ricas, com identificação, validação e comportamentos.
+
+Motivo: Não prejudica a escalabilidade da aplicação, facilita na aplicação de event history, caso
+a equipe decida aplicar, facilita a aplicação de validações através de comand, já que as
+responsabilidades estão separadas, entre outros padrões arquiteturais.
+
+como usar: segregue seus comandos de leituras e escritas, utilize o pattern command para
+auxiliar na aplicação do CQRS.
+
+Infra: para essa camada, como o banco de dados que a equipe tem amplo conhecimento é o
+SQL Server, ele seria o banco escolhido, para mapear as entidades com o banco escolheria o
+Fluente API, utilizaria também o Entity Framework para escrita em banco de dados, porém para
+leitura por uma questão de performance adotaria o Dapper.
+
+Motivo: as tecnologias citadas acima ajudam no mapeamento do banco, na escrita e leitura, a
+escolha do Dapper se dá por ser mais performático que o Entity na leitura.
+
+como usar: para uso do Dapper deve-se ter seu pacote instalado, para uma query, atribua sua
+query string a uma variável, chame o extensions da connection ex:
+string sql = “query”; Db.Database.Connection.Query&lt;T&gt;(sql);
+
+Crosscuting: Sabendo que esta camada é uma camada transversal. Nela utilizaríamos serviços
+como injeção de dependência, Identity, caso seja esse o método de autenticação, serviços de
+logs, e outros que o business deva suportar.
+
+Motivo: é responsabilidade da infra configurar os serviços que outras camadas irão utilizar, por
+isso a necessidade de uso da mesma. Injeção de dependência ajuda no desacoplamento entre as
+camadas, e na versão do asp .net core, já vem com o framework nativo, por isso o uso deste
+pattern.
+
+como usar: Dentro do método RegisterServices (IServiceCollection services) registre seus
+services de injeção da seguinte forma ex: services. AddScoped&lt;Interface, classe&gt;();
+além do scoped existem outros tipos de instancia como singleton e transiente.
+
+Testes: Na camada de testes de modo a incentivar o uso do TDD, utilizaria o specflow, onde
+nessa ferramenta inserimos a história do usuário e após devidamente inseridas, geramos os step
+definitions, onde implementarmos os casos de testes nos métodos gerados pelo specflow.
+
+Motivo: O specflow além de auxiliar nos testes, ainda ajuda no entendimento do negócio, esta
+abordagem é conhecida como BDD, e um de seus grandes benefícios é que todos envolvidos no
+projeto falem uma linguagem ubíqua e tenha uma documentação no código do projeto.
+
+como usar: Instale as dependências do specflow no visual studio e no seu projeto, crie um
+arquivo specflow no projeto de testes, escreva suas user history, clique com botão direito e
+generate step definitions, escreva seus testes de acordo com os métodos gerados. Para mais
+detalhes em meu repositório tem um projeto ContaBancariaDemo, nele faço uso do DDD, BDD
+(Specflow) e TDD.
+
+Services: Nesta camada entre as diversas tecnologias que podem ser utilizadas, irei citar aqui
+3 que acredito ser interessante para qualquer aplicação, Swagger, AutoMapper, e Identity
+Server.
+
+Motivo: O Swagger oferece suporte a documentação interativas para os métodos da sua API
+que por sua vez ajudam ao desenvolvedor identificar o objetivo do mesmo. AutoMapper
+melhora a produtividade do desenvolvedor fazendo o mapeamento das classes em apenas uma
+linha de código. Identity Server auxilia no gerenciamento de tokens e autenticação. Todos os
+citados tem sua importância nesta camada.
+
+como usar: para as tecnologias citadas acima cada uma deve-se ter suas respectivas classes
+de configuração e adicionada seu service ao Startup.cs, apenas no token requer uma
+complexidade maior pois é uma tecnologia mais rica em detalhes.
+
+Client: No front-end uma boa tecnologia a ser implementada seria o angular, por ser
+performático, simples e ter uma arquitetura baseado em componentes. Para criação de uma
+interface mais rica para o usuário o NG-Bootstrapp ajuda na criação e manipulação de widgets.
+
+Motivo: auxiliam na produtividade, performance e modelagem da interface.
+
+como usar: Demonstrado no projeto enviado.

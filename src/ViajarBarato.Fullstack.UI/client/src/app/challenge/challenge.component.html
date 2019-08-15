@@ -1,0 +1,30 @@
+<app-menu-superior></app-menu-superior>
+<h1>Challenge</h1>
+<p>Desafio para demonstração de habilidades</p>
+<p *ngIf="!loading"><em>Loading...</em></p>
+
+<div class="form-group" *ngIf="swa && loading">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <input name="first" id="typeahead-basic" type="text"  class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" />
+  </form>
+  <hr>
+</div>
+
+<table class='table table-striped' *ngIf="swa && loading">
+  <thead>
+    <tr>
+      <th>Personagem</th>
+      <th>Planeta Natal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let swa of swa">
+      <td>{{ swa.nomePersonagem }}</td>
+      <td>{{ swa.planetaNatal }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ngb-pagination *ngIf="swa && loading" [collectionSize]="collectionSize" [pageSize]="pageSize" [(page)]="page"
+                aria-label="Default pagination" (pageChange)="pageChange()"></ngb-pagination>
+
