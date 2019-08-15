@@ -1,4 +1,4 @@
-Sabendo que todos os programadores do Viajar Barato possuem amplo
+#Sabendo que todos os programadores do Viajar Barato possuem amplo
 conhecimento em .NET e SQL Server, se você fosse construir um novo site do
 Viajar Barato, qual tecnologia e arquitetura você usaria? Explique o motivo da
 sua escolha e aponte como usar cada uma delas.
@@ -7,7 +7,7 @@ Supondo que o viajar barato seja uma aplicação de alta complexidade, irei espe
 arquitetura escolhida, assim como quais tecnologias utilizaria e o porquê em cada camada.
 A arquitetura escolhida seria a clean architecture
 
-Motivo: Esta arquitetura ajuda a gerenciar a complexidade da aplicação, organização do código
+#Motivo:# Esta arquitetura ajuda a gerenciar a complexidade da aplicação, organização do código
 e facilita nas aplicações de padrões arquiteturais e modelagem tais como: CQRS, DDD, entre
 outros.
 
