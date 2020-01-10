@@ -1,4 +1,4 @@
-![alt text](http://www.viajarbarato.com.br/images/challenge/logo-vb.png)
+
 
 # PRÉ-REQUISITO 
 1 - Ter o NodeJs devidamente instalado 
